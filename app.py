@@ -4,11 +4,14 @@ app = Flask(__name__)
 @app.route("/")
 
 def index():
+    print("Hi this my Aap service slot for testing")
     cpu_percent = psutil.cpu_percent()
     mem_percent = psutil.virtual_memory().percent
     Message = None
     if cpu_percent> 80 or mem_percent > 80:
         Message = "High CPU or Memory Utilization detected. please scale up"
+    if cpu_percent> 30 or mem_percent > 30:
+        Message = "This Is Not High Utilization You can Use more"
     return render_template("index.html", cpu_metric=cpu_percent, mem_metric=mem_percent, message=Message)
 
 if __name__=='__main__':
